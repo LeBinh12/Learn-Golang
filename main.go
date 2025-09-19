@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"my-app/middleware"
 	ginitem "my-app/modules/item/transport/gin"
 	"os"
 
@@ -23,6 +24,7 @@ func main() {
 	}
 
 	r := gin.Default()
+	r.Use(middleware.Recovery())
 
 	v1 := r.Group("/v1")
 	{
@@ -37,5 +39,5 @@ func main() {
 		}
 	}
 
-	r.Run(":3000")
+	r.Run("0.0.0.0:3000")
 }
